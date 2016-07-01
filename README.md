@@ -11,3 +11,9 @@ $ php composer.phar install
 ```
 $ php -S localhost:8000 routing.php
 ```
+
+
+License
+-------
+
+Licensed under the MIT License. See the LICENSE file for more details.
