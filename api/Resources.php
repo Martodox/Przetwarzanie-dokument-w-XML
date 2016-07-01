@@ -5,7 +5,7 @@
   class Resources {
 
 
-    public function getResource($resource){
+    public function getLoad($resource){
 
       $file = simplexml_load_file(getcwd() . '/files/' . $resource . '.xml');
 

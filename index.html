@@ -10,23 +10,30 @@
     <script src="/js/app.js"></script>
 
 </head>
-<body data-ng-controller="AppController" class="col-xs-8 col-xs-offset-2">
+<body class="col-xs-8 col-xs-offset-2">
 
-<h1>Przetwarzanie dokumentów XML</h1>
-<article class="well">
-    <h2>Opis działania</h2>
+    <h1>Przetwarzanie dokumentów XML</h1>
+    <article class="well">
+        <h2>Opis działania</h2>
 
-    <p>
-        Aplikacja jest prostym systemem zarządzania listami osób.
-    </p>
-    <p>
-        Za jej pomocą możemy przechowywać listę osób posiadającą określone cechy.
-        Aby upewnić się, że dane przesyłane na nasz serwer są zawsze porawne,
-        wymagana jest odpowiednia struktura wysyłanych danych. Dla ułatwienia validacji, serwer wykorzystuje
-        szablony XML Schema, aby w automatyczny oraz natywny sposób dbać o integralność danych.
-    </p>
-</article>
+        <p>
+            Aplikacja jest prostym systemem zarządzania listami osób.
+        </p>
+        <p>
+            Za jej pomocą możemy przechowywać listę osób posiadającą określone cechy.
+            Aby upewnić się, że dane przesyłane na nasz serwer są zawsze porawne,
+            wymagana jest odpowiednia struktura wysyłanych danych. Dla ułatwienia validacji, serwer wykorzystuje
+            szablony XML Schema, aby w automatyczny oraz natywny sposób dbać o integralność danych.
+        </p>
+    </article>
 
+    <div data-ng-controller="AppController as vm">
+
+        <pre>{{ vm.data | json }}</pre>
+
+        <button class="btn" ng-click="vm.loadData()">Załaduj dane</button>
+
+    </div>
 
 </body>
 

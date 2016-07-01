@@ -6,6 +6,6 @@
 
   use RestService\Server;
 
-  Server::create('/users', 'api\Resources')
+  Server::create('/resources', 'api\Resources')
     ->collectRoutes()
     ->run();
