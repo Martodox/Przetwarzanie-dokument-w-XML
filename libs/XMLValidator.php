@@ -26,7 +26,7 @@
 
       $this->xml = new DOMDocument();
       if (!empty($this->fileName)) {
-        $this->xml->load('files/' . $this->fileName . '.xml');
+        $this->xml->load($this->fileName);
       }
     }
 
@@ -35,14 +35,29 @@
       return libxml_get_errors();
     }
 
-    public function validate() : bool
+    public function validate($matchAgainst) : bool
     {
-      $this->isValid = $this->xml->schemaValidate('files/' . $this->fileName . '.xsd');
+      $this->isValid = $this->xml->schemaValidate('files/' . $matchAgainst . '.xsd');
       return $this->isValid;
     }
 
 
-    public function restResponse()
+    public static function arrayToXml($data, &$xml_data) {
+      foreach( $data as $key => $value ) {
+        if( is_array($value) ) {
+          if( is_numeric($key) ){
+            $key = 'item'.$key;
+          }
+          $subnode = $xml_data->addChild($key);
+          self::arrayToXml($value, $subnode);
+        } else {
+          $xml_data->addChild("$key",htmlspecialchars("$value"));
+        }
+      }
+    }
+
+
+    public function restResponse() : array
     {
       $response = new stdClass();
       $response->valid = true;
@@ -54,7 +69,7 @@
         $response->errors = $this->getErrors();
       }
 
-      echo json_encode($response);
+      return (array) $response;
     }
 
   }

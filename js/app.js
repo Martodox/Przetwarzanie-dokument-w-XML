@@ -16,6 +16,8 @@
       console.log(content)
     }
 
+    $http.get('/resources/validate-resource?part=customer&add=true')
+
     return this
 
   }
