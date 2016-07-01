@@ -2,10 +2,10 @@
 
   include 'vendor/autoload.php';
 
-  include "api/Users.php";
+  include "api/Resources.php";
 
   use RestService\Server;
 
-  Server::create('/users', 'api\Users')
+  Server::create('/users', 'api\Resources')
     ->collectRoutes()
     ->run();
