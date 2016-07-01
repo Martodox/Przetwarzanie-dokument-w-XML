@@ -12,11 +12,17 @@
       })
     }
 
+    //http://localhost:8000/resources/append-resource?part=customer&fileName=/Users/martodox/School/xml/uploads/test.xml&resource=orders
+
     this.onFileSend = (content) => {
-      console.log(content)
+
+      $http.get('/resources/validate-resource?part=' + content.data.resourcePart + '&fileName=' + content.data.fileName).then((isValid) => {
+        console.log(isValid)
+      })
+
+
     }
 
-    $http.get('/resources/validate-resource?part=customer&add=true')
 
     return this
 
