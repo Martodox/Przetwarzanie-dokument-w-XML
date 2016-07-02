@@ -10,17 +10,17 @@
     <script src="/js/app.js"></script>
 
 </head>
-<body class="col-xs-8 col-xs-offset-2">
+<body ng-init="showDesc = false" class="col-xs-8 col-xs-offset-2">
 
-    <h1>Przetwarzanie dokumentów XML</h1>
-    <article class="well">
+    <h1 ng-click="showDesc = !showDesc">Przetwarzanie dokumentów XML</h1>
+    <article ng-show="showDesc" class="well">
         <h2>Opis działania</h2>
 
         <p>
-            Aplikacja jest prostym systemem zarządzania listami osób.
+            Aplikacja jest prostym systemem zarządzania listami klientów oraz zamówień.
         </p>
         <p>
-            Za jej pomocą możemy przechowywać listę osób posiadającą określone cechy.
+            Za jej pomocą możemy przechowywać listę posiadającą określone cechy.
             Aby upewnić się, że dane przesyłane na nasz serwer są zawsze porawne,
             wymagana jest odpowiednia struktura wysyłanych danych. Dla ułatwienia validacji, serwer wykorzystuje
             szablony XML Schema, aby w automatyczny oraz natywny sposób dbać o integralność danych.
@@ -30,7 +30,7 @@
     <div data-ng-controller="AppController as vm">
 
         <button class="btn btn-primary" ng-click="vm.loadData()">Odśwież dane</button>
-        <button class="btn btn-danger" ng-click="vm.data = []">Skasuj dane</button>
+        <button class="btn btn-danger" ng-click="vm.removeData()">Skasuj dane</button>
 
         <div class="data-container row">
 
@@ -60,6 +60,23 @@
                 </div>
             </div>
 
+        </div>
+
+        <div ng-show="vm.showMessages" class="messages col-xs-10 col-xs-offset-1">
+            <div ng-show="vm.success" class="alert alert-success" role="alert">
+                <span ng-click="vm.showMessages = false; vm.success = false" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                Plik został dodany poprawnie.
+            </div>
+            <div ng-show="vm.error" class="alert alert-danger" role="alert">
+                <span ng-click="vm.showMessages = false; vm.error = false" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                Plik nie został porpawnie zwalidowany. Lista błędów:
+                <ul class="list-group">
+                    <li ng-repeat="error in vm.validationErrors" class="list-group-item">
+                        <span class="badge">{{error.line}}</span>
+                        {{error.message}}
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <div class="data-container row">

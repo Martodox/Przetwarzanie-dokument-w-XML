@@ -21,6 +21,16 @@
 
     }
 
+    public function getRemoveResource($resource) {
+
+      $fileName = $this->resourceFileName($resource);
+
+      $blankResource = $fileName . '.empty';
+
+      return copy($blankResource, $fileName);
+
+    }
+
     public function postAddNewResource($resourcePart) {
 
       $uploadDir = getcwd() . '/uploads/' . md5(microtime()) . '_';
@@ -144,6 +154,7 @@
 
       $databaseFile = $this->resourceFileName($resource);
 
+      /* @var $database SimpleXMLElement */
       $database = simplexml_load_file($databaseFile);
 
 
