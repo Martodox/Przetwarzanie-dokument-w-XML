@@ -26,7 +26,13 @@
 
     this.loadData =  () => {
       $http.get('/resources/load?resource=orders').then((response) => {
-        this.data = normalize(response);
+
+        if (angular.isDefined(response[0]) && !response[0]) {
+          this.removeData()
+        } else {
+          this.data = normalize(response);
+        }
+
       })
     }
 
